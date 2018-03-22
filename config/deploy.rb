@@ -18,3 +18,14 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rben
 # when using db, you should add config/database.yml here
 set :linked_files, fetch(:linked_files, []).concat(%w{.rbenv-vars})
 set :linked_dirs, fetch(:linked_dirs, []).concat(%w{log tmp/pids tmp/cache tmp/sockets vendor/bundle})
+
+namespace :deploy do
+  desc 'Restart application'
+  task :restart do
+    on roles(:app) do
+      execute "#{fetch(:rbenv_prefix)} pumactl -P ~/app/current/tmp/pids/puma.pid phased-restart"
+    end
+  end
+end
+
+after 'deploy:publishing', 'deploy:restart'
