@@ -1,4 +1,4 @@
-set :stage, :production # this defines production stage for deployment
+set :stage, :staging # this defines production stage for deployment
 
 set :branch, 'rails52'
 
