@@ -15,7 +15,7 @@ environment rails_env
 app_dir = File.expand_path("../..", __FILE__)
 shared_dir = "#{app_dir}/tmp"
 
-if rails_env == 'production'
+if %w[production staging].member?(rails_env)
   # Logging
   stdout_redirect "#{app_dir}/log/puma.stdout.log", "#{app_dir}/log/puma.stderr.log", true
 
