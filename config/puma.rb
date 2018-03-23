@@ -13,6 +13,7 @@ rails_env = ENV.fetch("RAILS_ENV") { "development" }
 environment rails_env
 
 app_dir = File.expand_path("../..", __FILE__)
+directory app_dir
 shared_dir = "#{app_dir}/tmp"
 
 if %w[production staging].member?(rails_env)
