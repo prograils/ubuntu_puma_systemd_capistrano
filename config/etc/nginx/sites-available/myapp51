@@ -1,0 +1,37 @@
+upstream myapp51_backend {
+    server unix:/home/myapp51/app/shared/tmp/sockets/puma.sock fail_timeout=0;
+}
+
+server {
+    listen 80;
+    root /home/myapp51/app/current/public;
+    index index.html index.htm;
+    if ($http_transfer_encoding ~* chunked) {
+        return 444;
+    }
+
+    server_name myapp51.prograils.com;
+
+    location / {
+        access_log          off;
+
+        include proxy_params;
+        proxy_redirect off;
+
+
+        if (-f $request_filename) {
+            access_log          off;
+            expires             max;
+            break;
+        }
+
+        if (-f $request_filename.html) {
+            rewrite (.*) $1.html break;
+        }
+
+        if (!-f $request_filename) {
+            proxy_pass          http://myapp51_backend;
+            break;
+        }
+    }
+}

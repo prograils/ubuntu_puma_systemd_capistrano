@@ -1,0 +1,19 @@
+[Unit]
+Description=Myapp51 Puma Server
+After=network.target
+
+[Service]
+Type=simple
+User=myapp51
+EnvironmentFile=/home/myapp51/app/current/.rbenv-vars
+Environment=RAILS_ENV=production
+WorkingDirectory=/home/myapp51/app/current/
+ExecStart=/home/myapp51/.rbenv/bin/rbenv exec bundle exec puma -C /home/myapp51/app/current/config/puma.rb
+ExecStop=/home/myapp51/.rbenv/bin/rbenv exec bundle exec pumactl -F /home/myapp51/app/current/config/puma.rb stop
+ExecReload=/home/myapp51/.rbenv/bin/rbenv exec bundle exec pumactl -F /home/myapp51/app/current/config/puma.rb phased-restart
+TimeoutSec=15
+Restart=always
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
