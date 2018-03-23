@@ -47,5 +47,6 @@ if %w[production staging].member?(rails_env)
   end
 elsif rails_env == "development"
   # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-  port        ENV.fetch("PORT") { 3000 }
+  port   ENV.fetch("PORT") { 3000 }
+  plugin :tmp_restart
 end
