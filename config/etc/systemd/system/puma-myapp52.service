@@ -1,0 +1,19 @@
+[Unit]
+Description=Myapp22 Puma Server
+After=network.target
+
+[Service]
+Type=simple
+User=myapp52
+EnvironmentFile=/home/myapp52/app/current/.rbenv-vars
+Environment=RAILS_ENV=staging
+WorkingDirectory=/home/myapp52/app/current/
+ExecStart=/home/myapp52/.rbenv/bin/rbenv exec bundle exec puma -C /home/myapp52/app/current/config/puma.rb
+ExecStop=/home/myapp52/.rbenv/bin/rbenv exec bundle exec pumactl -F /home/myapp52/app/current/config/puma.rb stop
+ExecReload=/home/myapp52/.rbenv/bin/rbenv exec bundle exec pumactl -F /home/myapp52/app/current/config/puma.rb phased-restart
+TimeoutSec=15
+Restart=always
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
