@@ -1,4 +1,11 @@
-<h1>Rails <%= Rails.version %></h1>
-<h3>Ruby <%= RUBY_VERSION %></h3>
-<h3>Environment <%= Rails.env %></h3>
-
+<div class="rails">
+  <%= image_tag "rails.svg" %>
+  <h1>Rails version: <%= Rails.version %></h1>
+</div>
+<div class="ruby">
+  <%= image_tag "ruby.png" %>
+  <h3>Ruby version: <%= RUBY_VERSION %></h3>
+</div>
+<div class="env">
+  <h3>Environment <%= Rails.env %></h3>
+</div>
