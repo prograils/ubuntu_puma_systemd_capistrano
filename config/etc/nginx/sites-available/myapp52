@@ -12,26 +12,22 @@ server {
 
     server_name myapp52.prograils.com;
 
+    access_log off;
+
+    location ~ ^/assets/ {
+      gzip_static on;
+      expires max;
+      add_header Cache-Control public;
+    }
+
     location / {
-        access_log          off;
+      try_files $uri.html $uri @app;
+    }
 
-        include proxy_params;
-        proxy_redirect off;
+    location @app {
+      include proxy_params;
+      proxy_redirect off;
 
-
-        if (-f $request_filename) {
-            access_log          off;
-            expires             max;
-            break;
-        }
-
-        if (-f $request_filename.html) {
-            rewrite (.*) $1.html break;
-        }
-
-        if (!-f $request_filename) {
-            proxy_pass          http://myapp52_backend;
-            break;
-        }
+      proxy_pass http://myapp52_backend;
     }
 }
