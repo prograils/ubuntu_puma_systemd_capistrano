@@ -110,7 +110,7 @@ GEM
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     public_suffix (3.0.2)
-    puma (3.11.3)
+    puma (3.12.4)
     rack (2.0.4)
     rack-test (0.8.3)
       rack (>= 1.0, < 3)
@@ -210,7 +210,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
-  puma (~> 3.7)
+  puma (~> 3.12)
   rails (~> 5.1.5)
   rbnacl (>= 3.2, < 5.0)
   rbnacl-libsodium
